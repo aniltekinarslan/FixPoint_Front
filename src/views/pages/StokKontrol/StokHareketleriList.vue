@@ -71,7 +71,7 @@
         <el-dialog
                 title="Filtrele"
                 :visible.sync="filterOuterVisible"
-                width="25%"
+                width="500px"
                 align="center"
                 append-to-body
                 :close-on-click-modal="false"
@@ -117,13 +117,13 @@
                                         <el-col :xs="12" :lg="12" :span="2">
                                             <el-input placeholder="Stok Kodu 1" v-model="paginateFilter.StokKod1" clearable>
                                                 <i slot="prefix" class="mdi mdi-search-web"
-                                                   @click="findVariant('paginateFilter','StokKod1', 'StokKod')"></i>
+                                                   @click="findVariant('paginateFilter.StokKod1')"></i>
                                             </el-input>
                                         </el-col>
                                         <el-col :xs="12" :lg="12" :span="2">
                                             <el-input placeholder="Stok Kodu 2"  v-model="paginateFilter.StokKod2" clearable>
                                                 <i slot="prefix" class="mdi mdi-search-web"
-                                                   @click="findVariant('paginateFilter','StokKod2', 'StokKod')"></i>
+                                                   @click="findVariant('paginateFilter.StokKod2')"></i>
                                             </el-input>
                                         </el-col>
                                     </el-row>
@@ -136,13 +136,13 @@
                                         <el-col :xs="12" :lg="12" :span="2">
                                             <el-input placeholder="Variant Kodu 1" v-model="paginateFilter.VariantKod1" clearable>
                                                 <i slot="prefix" class="mdi mdi-search-web"
-                                                   @click="findVariant('paginateFilter','VariantKod1', 'VariantKod')"></i>
+                                                   @click="findVariant('paginateFilter.VariantKod1')"></i>
                                             </el-input>
                                         </el-col>
                                         <el-col :xs="12" :lg="12" :span="2">
                                             <el-input placeholder="Variant Kodu 2" v-model="paginateFilter.VariantKod2" clearable>
                                                 <i slot="prefix" class="mdi mdi-search-web"
-                                                   @click="findVariant('paginateFilter','VariantKod2', 'VariantKod')"></i>
+                                                   @click="findVariant('paginateFilter.VariantKod2')"></i>
                                             </el-input>
                                         </el-col>
                                     </el-row>
@@ -180,7 +180,7 @@
                             </el-col>
 
                             <el-col :xs="24" :lg="24" class="mt-20">
-                                <el-button type="danger" style="float:left;" @click="filterOuterVisible = false" size="mini">
+                                <el-button type="danger" style="float:left;" @click="filterOuterVisible = false" >
                                     Vazgeç
                                 </el-button>
                                 <el-button type="primary" style="float:right;"
@@ -543,7 +543,6 @@
     import GirisTuru from '@/components/Tanimlamalar/GirisTuru'
     import CikisTuru from '@/components/Tanimlamalar/CikisTuru'
     import VariantArama from '@/components/Aramalar/VariantArama'
-    import $ from 'jquery';
 
     const paginateFilter = {
         pageTotal: 0,
@@ -658,8 +657,9 @@
             this.getAllDatas();
         },
         methods: {
-            findVariant(parentName, name, targetName)
+            findVariant(model)
             {
+                this.FillModel(model);
                 this.variantAramaVisible = true;
             },
 
@@ -770,13 +770,25 @@
                     if (inData == null)
                         return;
 
-                    if(inData[0] === 'item.VariantKod2')
-                        this.item.VariantKod2 = inData[1].VariantKod;
-                    else
+                    if(inData[0] === 'paginateFilter.StokKod1')
                     {
-                        this.item.StokKod = inData[1].StokKod;
-                        this.item.VariantKod = inData[1].VariantKod;
+                        this.paginateFilter.StokKod1 = inData[1].StokKod;
                     }
+                    else if(inData[0] === 'paginateFilter.StokKod2')
+                    {
+                        this.paginateFilter.StokKod2 = inData[1].StokKod;
+                    }
+                    else if(inData[0] === 'paginateFilter.VariantKod1')
+                    {
+                        this.paginateFilter.StokKod1 = inData[1].StokKod;
+                        this.paginateFilter.VariantKod1 = inData[1].VariantKod;
+                    }
+                    else if(inData[0] === 'paginateFilter.VariantKod2')
+                    {
+                        this.paginateFilter.StokKod2 = inData[1].StokKod;
+                        this.paginateFilter.VariantKod2 = inData[1].VariantKod;
+                    }
+
                 }
             },
         },

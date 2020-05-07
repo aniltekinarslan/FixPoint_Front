@@ -1,4 +1,4 @@
-let resource = 'Muhasebe/MCari';
+let resource = 'Satis/Teklif';
 
 export default {
     GetByPage(paginateFilter) {
@@ -24,7 +24,7 @@ export default {
         return window.axios.put(resource + "/" + item.CariKod, item);
     },
 
-    GetNewCariKod(kod) {
-        return window.axios.get(resource + "/getnew?CariKod=" + kod);
+    GetUrunBazliListe(paginateFilter) {
+        return window.axios.get(resource + "/urunbazliliste", {params: paginateFilter});
     },
 }

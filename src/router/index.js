@@ -9,6 +9,8 @@ import TanimlamalarKullanicilarList from '../views/pages/Tanimlamalar/Kullanicil
 import TanimlamalarModulTanimlamalariStokKontrol from '../views/pages/Tanimlamalar/ModulTanimlamalari/StokKontrol'
 import MuhasebeMCarilerList from '../views/pages/Muhasebe/MCarilerList'
 
+import SatisTekliflerList from '../views/pages/Satis/TekliflerList'
+
 //import CryptoDashboard from '../views/apps/CryptoDashboard.vue'
 //import EcommerceDashboard from '../views/apps/ecommerce/Dashboard.vue'
 //import Calendar from '../views/apps/Calendar.vue'
@@ -114,6 +116,18 @@ const router = new Router({
 				searchable: true,
 				title: 'Cariler',
 				tags: ['cari', 'muhasebe']
+			}
+		},
+		{
+			path: '/satiscrm/teklifler',
+			name: 'satiscrm.teklifler.list',
+			component: SatisTekliflerList,
+			meta: {
+				auth: true,
+				layout: layouts.navLeft,
+				searchable: true,
+				title: 'Teklifler',
+				tags: ['teklif', 'satis']
 			}
 		},
 		{

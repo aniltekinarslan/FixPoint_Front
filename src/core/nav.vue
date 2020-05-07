@@ -67,23 +67,23 @@
 			</el-menu-item>
 		</el-submenu>
 
-		<el-submenu index="satis_crm" popper-class="main-navigation-submenu">
+		<el-submenu index="satiscrm" popper-class="main-navigation-submenu">
 			<template slot="title">
 				<i class="mdi mdi-account"></i><span>Satış & CRM</span>
 			</template>
-			<el-menu-item index="satis_crm.musteriler.list" :route="{name:'satis_crm.musteriler.list'}">
+			<el-menu-item index="satiscrm.musteriler.list" :route="{name:'satiscrm.musteriler.list'}">
 				<span slot="title">Müşteriler</span>
 			</el-menu-item>
-			<el-menu-item index="satis_crm.teklifler.list" :route="{name:'satis_crm.teklifler.list'}">
+			<el-menu-item index="satiscrm.teklifler.list" :route="{name:'satiscrm.teklifler.list'}">
 				<span slot="title">Teklifler</span>
 			</el-menu-item>
-			<el-menu-item index="satis_crm.siparisler.list" :route="{name:'satis_crm.siparisler.list'}">
+			<el-menu-item index="satiscrm.siparisler.list" :route="{name:'satiscrm.siparisler.list'}">
 				<span slot="title">Siparişler</span>
 			</el-menu-item>
-			<el-menu-item index="satis_crm.sevkiyat_irsaliye.list" :route="{name:'satis_crm.sevkiyat_irsaliye.list'}">
+			<el-menu-item index="satiscrm.sevkiyat_irsaliye.list" :route="{name:'satiscrm.sevkiyat_irsaliye.list'}">
 				<span slot="title">Sevkiyat & İrsaliye</span>
 			</el-menu-item>
-			<el-menu-item index="satis_crm.satis_iade_irsaliyeleri.list" :route="{name:'satis_crm.satis_iade_irsaliyeleri.list'}">
+			<el-menu-item index="satiscrm.satis_iade_irsaliyeleri.list" :route="{name:'satiscrm.satis_iade_irsaliyeleri.list'}">
 				<span slot="title">Satış - İade İrsaliyeleri</span>
 			</el-menu-item>
 		</el-submenu>
@@ -131,7 +131,7 @@
 				<el-menu-item index="tanimlamalar.modul_tanimlamalari.muhasebe_finans" :route="{name:'tanimlamalar.modul_tanimlamalari.muhasebe_finans.list'}">
 					<span slot="title">Muhasebe & Finans</span>
 				</el-menu-item>
-				<el-menu-item index="tanimlamalar.modul_tanimlamalari.satis_crm" :route="{name:'tanimlamalar.modul_tanimlamalari.satis_crm.list'}">
+				<el-menu-item index="tanimlamalar.modul_tanimlamalari.satiscrm" :route="{name:'tanimlamalar.modul_tanimlamalari.satiscrm.list'}">
 					<span slot="title">Satış/CRM</span>
 				</el-menu-item>
 				<el-menu-item index="tanimlamalar.modul_tanimlamalari.satinalma" :route="{name:'tanimlamalar.modul_tanimlamalari.satinalma.list'}">

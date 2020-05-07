@@ -424,10 +424,30 @@ html:not(.ie) {
 .input-yellow .el-input__inner {
 	 background-color: #ffffc9;
  }
-.input-yellow .el-input__inner {
-	background-color: #ffffc9;
+.input-pink .el-input__inner {
+	background-color: #fff0fd;
 }
 .input-purple .el-input__inner {
 	background-color: #edc9ff;
+}
+
+.el-date-editor.el-input, .el-date-editor.el-input__inner {
+	width: 120px;
+}
+
+.el-input--suffix .el-input__inner {
+	padding-right: 5px;
+}
+
+.el-form-item {
+	margin-bottom: 5px;
+}
+.el-form-item__content
+{
+	line-height: 28px;
+}
+.el-form-item__label
+{
+	line-height: 28px;
 }
 </style>

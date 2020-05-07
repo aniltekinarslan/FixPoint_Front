@@ -40,17 +40,19 @@
                                 <el-row :gutter="15">
                                     <el-col :xs="12" :lg="12">
                                         <el-row :gutter="10">
-                                            <el-col :xs="7" :lg="7">
+                                            <el-col :xs="8" :lg="8">
                                                 <el-form-item label="Cari Kodu" size="mini" label-width="70px">
-                                                    <el-input placeholder="Cari Kodu"
-                                                              v-model="data.CariKod" :disabled="data.id > 0" clearable>
+                                                    <el-input placeholder="Cari Kodu" class="input-pink"
+                                                              v-model="data.CariKod" :disabled="data.id > 0">
+                                                        <i slot="prefix" class="mdi mdi-search-web"
+                                                           @click="findCariKod()"></i>findcar
                                                     </el-input>
                                                 </el-form-item>
                                             </el-col>
 
-                                            <el-col :xs="13" :lg="13">
+                                            <el-col :xs="12" :lg="12">
                                                 <el-form-item label="Cari Tanımı" size="mini" label-width="75px">
-                                                    <el-input placeholder="Cari Tanımı" v-model="data.CariAdi"
+                                                    <el-input placeholder="Cari Tanımı" v-model="data.CariAdi" class="input-pink"
                                                               clearable></el-input>
                                                 </el-form-item>
                                             </el-col>
@@ -68,7 +70,7 @@
                                             <el-col :xs="9" :lg="9">
                                                 <el-form-item label="Cari Hesap Tipi" size="mini" label-width="95px">
 
-                                                    <el-select v-model="data.CariHesapTipi" placeholder="- Seçin -">
+                                                    <el-select v-model="data.CariHesapTipi" placeholder="- Seçin -" class="input-pink">
                                                         <el-option key="Müşteri" value="Müşteri"></el-option>
                                                         <el-option key="Tedarikçi" value="Tedarikçi"></el-option>
                                                         <el-option key="Müşteri+Tedarikçi"
@@ -84,12 +86,12 @@
                                 </el-row>
 
                                 <el-row :gutter="15">
-                                    <el-col :xs="12" :lg="12">
+                                    <el-col :xs="13" :lg="12">
                                         <el-row :gutter="10">
 
                                             <el-col :xs="8" :lg="8">
                                                 <el-form-item label="Çalışma Durumu" size="mini" label-width="110px">
-                                                    <el-select v-model="data.KaraListe" placeholder="- Seçin -">
+                                                    <el-select v-model="data.KaraListe" placeholder="- Seçin -" class="input-pink">
                                                         <el-option key="Normal" value="Normal"></el-option>
                                                         <el-option key="Kontrol Altında"
                                                                    value="Kontrol Altında"></el-option>
@@ -118,7 +120,7 @@
                                         <el-row :gutter="10">
                                             <el-col :xs="9" :lg="9">
                                                 <el-form-item label="Yurtiçi/Yurtdışı" size="mini" label-width="95px">
-                                                    <el-select v-model="data.YurtIciDisi" placeholder="- Seçin -">
+                                                    <el-select v-model="data.YurtIciDisi" placeholder="- Seçin -" class="input-pink">
                                                         <el-option key="YURTİÇİ" value="YURTİÇİ"></el-option>
                                                         <el-option key="YURTDIŞI" value="YURTDIŞI"></el-option>
                                                     </el-select>
@@ -1184,6 +1186,24 @@
                 this.hesapPlaniAramaVisible = true;
             },
 
+            findCariKod()
+            {
+                MCarilerService
+                    .GetNewCariKod(this.data.CariKod)
+                    .then(response =>
+                    {
+                        if (response && response.data)
+                        {
+                            this.data.CariKod = response.data.data;
+                            this.loadingData = false;
+                        }
+                    })
+                    .catch(error =>
+                    {
+                        this.loadingData = false;
+                    });
+            },
+
             closeDialogControl(done)
             {
                 if (!this.CompareObject(this.data, this.dataCloned))
@@ -1222,13 +1242,7 @@
                     })
                     .catch(error =>
                     {
-                        if (error.response.data.errors)
-                        {
-                            Object.keys(error.response.data.errors).forEach(function (key)
-                            {
-                                this.ShowMsg('error', error.response.data.errors[key], error.response.data.title);
-                            });
-                        }
+                        this.loadingData = false;
                     });
             },
 
@@ -1239,6 +1253,19 @@
                     this.ShowMsg('error', 'Cari Kodu ve Cari Adı girmelisiniz!', 'Hata');
                     return;
                 }
+
+                if (_.isEmpty(this.data.CariHesapTipi))
+                {
+                    this.ShowMsg('error', 'Hesap Tipi girmelisiniz!', 'Hata');
+                    return;
+                }
+
+                if (_.isEmpty(this.data.YurtIciDisi))
+                {
+                    this.ShowMsg('error', 'Yurtiçi/Yurtışı Seçimi yapınız', 'Hata');
+                    return;
+                }
+
 
                 this.loadingData = true;
 
@@ -1255,20 +1282,16 @@
                                 this.fetchData();
                             }
                             else
+                            {
                                 this.ShowMsg('error', response.data.message, response.data.title);
+                                this.loadingData = false;
+                            }
                         }
 
-                        this.loadingData = false;
                     })
                     .catch(error =>
                     {
-                        if (error.response.data.errors)
-                        {
-                            Object.keys(error.response.data.errors).forEach(function (key)
-                            {
-                                this.ShowMsg('error', error.response.data.errors[key], error.response.data.title);
-                            });
-                        }
+                        this.loadingData = false;
                     });
             },
 
@@ -1338,7 +1361,8 @@
             },
 
 
-        },
+        }
+        ,
 
         mounted()
         {
@@ -1353,20 +1377,23 @@
             }
             else
                 this.fetchData();
-        },
+        }
+        ,
 
         watch: {
-            'hesapPlaniAramaVisible': function (newVal, oldVal)
-            {
-                if (newVal === false && oldVal === true)
-                {
-                    var inData = this.GetInputData();
-                    if (inData == null)
-                        return;
+            'hesapPlaniAramaVisible':
 
-                    this.data.HesapKod = inData[1].HesapKod;
+                function (newVal, oldVal)
+                {
+                    if (newVal === false && oldVal === true)
+                    {
+                        var inData = this.GetInputData();
+                        if (inData == null)
+                            return;
+
+                        this.data.HesapKod = inData[1].HesapKod;
+                    }
                 }
-            }
         }
     }
 </script>
